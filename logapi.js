@@ -1,15 +1,17 @@
-console.log("App launched!!");
-const http = require('http');
+var express = require('express');
+var app = express();
 
-const hostname = 'https://jsnlogging.herokuapp.com/';
-const port = (process.env.PORT || 5000);
+app.get('/listUsers', function (req, res) {
+  var data = {user:"toto"};
+  console.log( data );
+  res.end( data );
+})
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World\n');
-});
+var server = app.listen(8081, function () {
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+  var host = server.address().address
+  var port = server.address().port
+
+  console.log("Example app listening at http://%s:%s", host, port)
+
+})
